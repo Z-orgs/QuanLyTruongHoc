@@ -1,7 +1,7 @@
 <?php
 
-if(!defined("TEMPLATE")){
-	die("You do not have permission to access this file !");
+if (!defined("TEMPLATE")) {
+    die("You do not have permission to access this file !");
 }
 
 // Thống kê toàn bộ số lượng sản phẩm, danh mục, thành viên
@@ -37,7 +37,7 @@ $sql = "SELECT * FROM ";
                         </svg>
                     </div>
                     <div class="col-sm-9 col-lg-7 widget-right">
-                        <div class="large"><?php echo mysqli_num_rows(mysqli_query($conn, $sql."student"));?></div>
+                        <div class="large"><?php echo mysqli_num_rows(mysqli_query($conn, $sql . "student")); ?></div>
                         <div class="text-muted">Student</div>
                     </div>
                 </div>
@@ -47,10 +47,12 @@ $sql = "SELECT * FROM ";
             <div class="panel panel-red panel-widget">
                 <div class="row no-padding">
                     <div class="col-sm-3 col-lg-5 widget-left">
-                        <svg class="glyph stroked home"><use xlink:href="#stroked-home"/></svg>
+                        <svg class="glyph stroked home">
+                            <use xlink:href="#stroked-home" />
+                        </svg>
                     </div>
                     <div class="col-sm-9 col-lg-7 widget-right">
-                        <div class="large"><?php echo mysqli_num_rows(mysqli_query($conn, $sql."class"));?></div>
+                        <div class="large"><?php echo mysqli_num_rows(mysqli_query($conn, $sql . "class")); ?></div>
                         <div class="text-muted">Class</div>
                     </div>
                 </div>
@@ -65,7 +67,7 @@ $sql = "SELECT * FROM ";
                         </svg>
                     </div>
                     <div class="col-sm-9 col-lg-7 widget-right">
-                        <div class="large"><?php echo mysqli_num_rows(mysqli_query($conn, $sql."teacher"));?></div>
+                        <div class="large"><?php echo mysqli_num_rows(mysqli_query($conn, $sql . "teacher")); ?></div>
                         <div class="text-muted">Teacher</div>
                     </div>
                 </div>
@@ -80,7 +82,7 @@ $sql = "SELECT * FROM ";
                         </svg>
                     </div>
                     <div class="col-sm-9 col-lg-7 widget-right">
-                        <div class="large"><?php echo mysqli_num_rows(mysqli_query($conn, $sql."user"));?></div>
+                        <div class="large"><?php echo mysqli_num_rows(mysqli_query($conn, $sql . "user")); ?></div>
                         <div class="text-muted">Admin</div>
                     </div>
                 </div>
@@ -101,86 +103,84 @@ $sql = "SELECT * FROM ";
     </div>
     <!--/.row-->
 
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <table 
-                            data-toolbar="#toolbar"
-                            data-toggle="table">
-                            <thead>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <table data-toolbar="#toolbar" data-toggle="table">
+                        <thead>
                             <tr>
                                 <th>Ranking</th>
                                 <th>Name Class</th>
                                 <th>Teacher Manager</th>
                                 <th>Medium Score</th>
                             </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                    if(isset($_GET["page"])){
-                                        $page = $_GET["page"];
-                                    }
-                                    else{
-                                        $page = 1;
-                                    }
-                                    
-                                    $rows_per_page = 15;
-                                    $per_rows = $page*$rows_per_page - $rows_per_page;
+                        </thead>
+                        <tbody>
+                            <?php
+                            if (isset($_GET["page"])) {
+                                $page = $_GET["page"];
+                            } else {
+                                $page = 1;
+                            }
 
-                                    $total_rows = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM class"));
-                                    $total_pages = ceil($total_rows/$rows_per_page);
-                                    
-                                    $list_pages = '';
+                            $rows_per_page = 15;
+                            $per_rows = $page * $rows_per_page - $rows_per_page;
 
-                                    // Page Prev
-                                    $page_prev = $page - 1;
-                                    if($page_prev < 1){
-                                        $page_prev = 1;
-                                    }
-                                    $list_pages .= '<li class="page-item"><a class="page-link" href="index.php?page_layout=class&page='.$page_prev.'">&laquo;</a></li>';
-                                    
-                                    for($i=1; $i<=$total_pages; $i++){
-                                        $list_pages .= '<li class="page-item"><a class="page-link" href="index.php?page_layout=class&page='.$i.'">'.$i.'</a></li>';
-                                    }
+                            $total_rows = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM class"));
+                            $total_pages = ceil($total_rows / $rows_per_page);
 
-                                    // Page Next
-                                    $page_next = $page + 1;
-                                    if($page_next > $total_pages){
-                                        $page_next = $total_pages;
-                                    }
-                                    $list_pages .= '<li class="page-item"><a class="page-link" href="index.php?page_layout=class&page='.$page_next.'">&raquo;</a></li>';
-                                    
-                                    $sql = "SELECT * FROM class
-                                            ORDER BY class_id DESC
-                                            LIMIT $per_rows, $rows_per_page";
-                                    $query = mysqli_query($conn, $sql);
-                                    while($row = mysqli_fetch_array($query)){
-                                ?>
+                            $list_pages = '';
+
+                            // Page Prev
+                            $page_prev = $page - 1;
+                            if ($page_prev < 1) {
+                                $page_prev = 1;
+                            }
+                            $list_pages .= '<li class="page-item"><a class="page-link" href="index.php?page_layout=class&page=' . $page_prev . '">&laquo;</a></li>';
+
+                            for ($i = 1; $i <= $total_pages; $i++) {
+                                $list_pages .= '<li class="page-item"><a class="page-link" href="index.php?page_layout=class&page=' . $i . '">' . $i . '</a></li>';
+                            }
+
+                            // Page Next
+                            $page_next = $page + 1;
+                            if ($page_next > $total_pages) {
+                                $page_next = $total_pages;
+                            }
+                            $list_pages .= '<li class="page-item"><a class="page-link" href="index.php?page_layout=class&page=' . $page_next . '">&raquo;</a></li>';
+
+                            $sql = "SELECT * FROM class 
+                                    INNER JOIN teacher ON class.teacher_id = teacher.teacher_id 
+                                    ORDER BY class.class_id DESC 
+                                    LIMIT $per_rows, $rows_per_page";
+                            $query = mysqli_query($conn, $sql);
+                            while ($row = mysqli_fetch_array($query)) {
+                            ?>
                                 <tr>
                                     <td style=""><?php echo $row['class_id'] ?></td>
                                     <td style=""><?php echo $row['class_name'] ?></td>
-                                    <td style=""><?php echo $row['class_name'] ?></td>
+                                    <td style=""><?php echo $row['teacher_name'] ?></td>
                                     <td style=""> -- </td>
                                 </tr>
 
-                                <?php
-                                    }
-                                ?>
-                                
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="panel-footer text-right">
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination">
-                                <?php echo $list_pages;?>
-                            </ul>
-                        </nav>
-                    </div>
+                            <?php
+                            }
+                            ?>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="panel-footer text-right">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <?php echo $list_pages; ?>
+                        </ul>
+                    </nav>
                 </div>
             </div>
-        </div><!--/.row-->  
+        </div>
+    </div><!--/.row-->
 </div>
 <!--/.main-->
 
