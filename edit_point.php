@@ -19,12 +19,11 @@ if (isset($_POST["sbm"])) {
     // SQL
     $sql = "UPDATE point_student 
         SET 
-        point_student_id='$point_student_id',
-        point_number='$point_number',
-        semester_id='$semester_id'
-        subject_id='$subject_id'
+        point_student_id=$point_student_id,
+        point_number=$point_number,
+        semester_id=$semester_id,
+        subject_id=$subject_id
         WHERE point_id = $point_id";
-
     $result = mysqli_query($conn, $sql);
 
     if ($result) {
@@ -87,14 +86,14 @@ if (isset($_POST["sbm"])) {
                                 </div>
                                 <div class="form-group">
                                     <label>Semester</label>
-                                    <select name="point_semester_name" class="form-control">
+                                    <select name="semester_id" class="form-control">
                                         <?php
                                         $sql = "SELECT * FROM semester
                                                     ORDER BY semester_name ASC";
                                         $query = mysqli_query($conn, $sql);
                                         while ($row = mysqli_fetch_array($query)) {
                                         ?>
-                                            <option <?php if ($row['semester_name'] == $rowStd['semester_name']) {
+                                            <option <?php if ($row['semester_id'] == $rowStd['semester_id']) {
                                                         echo "selected";
                                                     } ?> value=<?php echo $row["semester_id"]; ?>><?php echo $row["semester_name"]; ?></option>
                                         <?php
@@ -102,7 +101,23 @@ if (isset($_POST["sbm"])) {
                                         ?>
                                     </select>
                                 </div>
-
+                                <div class="form-group">
+                                    <label>Subject</label>
+                                    <select name="subject_id" class="form-control">
+                                        <?php
+                                        $sql = "SELECT * FROM subject
+                                                    ORDER BY subject_name ASC";
+                                        $query = mysqli_query($conn, $sql);
+                                        while ($row = mysqli_fetch_array($query)) {
+                                        ?>
+                                            <option <?php if ($row['subject_id'] == $rowStd['subject_id']) {
+                                                        echo "selected";
+                                                    } ?> value=<?php echo $row["subject_id"]; ?>><?php echo $row["subject_name"]; ?></option>
+                                        <?php
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
                                 <button name="sbm" type="submit" class="btn btn-success">Edit point</button>
                                 <button type="reset" class="btn btn-default">Refresh</button>
 
