@@ -32,6 +32,7 @@
                                 <th>Number Point</th>
                                 <th>Classification</th>
                                 <th>Semester</th>
+                                <th>Subject</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -72,6 +73,10 @@
                             $sql = "SELECT * FROM student
                                     	INNER JOIN point_student
                                     	ON student.student_id = point_student.point_student_id
+                                        INNER JOIN semester
+                                        ON semester.semester_id = point_student.semester_id
+                                        INNER JOIN subject
+                                        ON subject.subject_id = point_student.subject_id
                                         ORDER BY student_id DESC
                                         LIMIT $per_rows, $rows_per_page";
 
@@ -95,7 +100,8 @@
                                         }
                                         $row['point_number'] ?>
                                     </td>
-                                    <td style=""><?php echo $row['semester_id'] ?></td>
+                                    <td style=""><?php echo $row['semester_name'] ?></td>
+                                    <td style=""><?php echo $row['subject_name'] ?></td>
                                     <td class="form-group">
                                         <a href="index.php?page_layout=edit_point&point_id=<?php echo $row['point_id'] ?>" class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i></a>
                                     </td>
