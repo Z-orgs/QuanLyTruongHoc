@@ -17,7 +17,7 @@ if (isset($_POST["sbm"])) {
     $subject_id = $_POST['subject_id'];
 
     // SQL
-    $sql = "INSERT INTO point_student(point_student_id,point_number,semester_id ) 
+    $sql = "INSERT INTO point_student(point_student_id,point_number,semester_id, subject_id ) 
         values('$point_student_id','$point_number','$semester_id', '$subject_id')";
 
     $result = mysqli_query($conn, $sql);
