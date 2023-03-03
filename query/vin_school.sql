@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 02, 2023 at 10:54 PM
+-- Generation Time: Mar 03, 2023 at 02:00 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -74,7 +74,7 @@ CREATE TABLE `point_student` (
 --
 
 INSERT INTO `point_student` (`point_id`, `point_number`, `point_student_id`, `semester_id`, `subject_id`) VALUES
-(6, 10, 1, 3, 11);
+(6, 8, 1, 3, 11);
 
 -- --------------------------------------------------------
 
@@ -90,6 +90,15 @@ CREATE TABLE `schedue` (
   `subject_id` varchar(255) NOT NULL,
   `class_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `schedue`
+--
+
+INSERT INTO `schedue` (`id`, `teacher_id`, `day`, `kip`, `subject_id`, `class_id`) VALUES
+(41, 4, 3, 1, '2', 1),
+(42, 4, 4, 1, '7', 1),
+(50, 9, 2, 1, '4', 1);
 
 -- --------------------------------------------------------
 
@@ -246,8 +255,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `user_full`, `user_mail`, `user_pass`, `user_level`) VALUES
-(2, 'Admin', 'admin@gmail.com', '123456', 1),
-(8, 'TRINH HUY DAT', 'huydat1508@gmail.com', '123456789', 2);
+(2, 'Admin', 'admin@gmail.com', '123456', 1);
 
 --
 -- Indexes for dumped tables
@@ -325,7 +333,7 @@ ALTER TABLE `point_student`
 -- AUTO_INCREMENT for table `schedue`
 --
 ALTER TABLE `schedue`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `semester`
@@ -337,7 +345,7 @@ ALTER TABLE `semester`
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `subject`
